@@ -3,6 +3,7 @@ from requests import Response, Session
 
 class CeryxClient(Session):
     def __init__(self, base_url: str):
+        super().__init__()
         self.base_url = base_url
         self.api_root = f"{self.base_url}/api"
 

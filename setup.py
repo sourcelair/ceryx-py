@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="ceryx",
-    version="0.1.1",
+    version="0.1.2",
     description=(
         "Python client for Ceryx"
     ),
