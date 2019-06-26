@@ -4,9 +4,10 @@ from requests import Response, Session
 class CeryxClient(Session):
     def __init__(self, base_url: str):
         self.base_url = base_url
+        self.api_root = f"{self.base_url}/api"
 
     def _get_route_url(self, host):
-        return f"{self.base_url}/{host}/"
+        return f"{self.api_root}/routes/{host}/"
 
     def _get_payload_from_kwargs(
         self, host, target, enforce_https, mode, certificate_path, key_path
@@ -30,7 +31,7 @@ class CeryxClient(Session):
         return response.json()
 
     def list_routes(self):
-        return self._request("get", self.base_url)
+        return self._request("get", f"{self.base_url}/routes/")
 
     def get_route(self, host: str):
         route_url = self._get_route_url(host)
@@ -57,7 +58,7 @@ class CeryxClient(Session):
             certificate_path=None,
             key_path=None,
         )
-        return self._request("post", self.base_url, payload)
+        return self._request("post", f"{self.api_root}/routes/", payload)
 
     def update_route(
         self,
