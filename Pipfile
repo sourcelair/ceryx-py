@@ -7,3 +7,4 @@ requests = "*"
 [dev-packages]
 black = "==19.3b0"
 mypy = "*"
+twine = "*"
