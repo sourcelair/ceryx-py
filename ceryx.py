@@ -5,7 +5,7 @@ class CeryxClient(Session):
     def __init__(self, base_url: str):
         self.base_url = base_url
 
-    def _get_host_url(self, host):
+    def _get_route_url(self, host):
         return f"{self.base_url}/{host}/"
 
     def _get_payload_from_kwargs(
@@ -23,7 +23,7 @@ class CeryxClient(Session):
         }
         return payload
 
-    def _request(self, method, url, payload):
+    def _request(self, method, url, payload={}):
         kwargs = {} if method == "get" else {"json": payload}
         response: Response = self.request(method, url, **kwargs)
         response.raise_for_status()
