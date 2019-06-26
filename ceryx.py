@@ -32,7 +32,7 @@ class CeryxClient(Session):
         return response.json()
 
     def list_routes(self):
-        return self._request("get", f"{self.base_url}/routes/")
+        return self._request("get", f"{self.api_root}/routes/")
 
     def get_route(self, host: str):
         route_url = self._get_route_url(host)
