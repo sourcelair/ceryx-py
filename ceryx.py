@@ -1,9 +1,9 @@
 from requests import Response, Session
 
 
-class CeryxClient(Session):
+class CeryxClient:
     def __init__(self, base_url: str):
-        super().__init__()
+        self._session = Session()
         self.base_url = base_url
         self.api_root = f"{self.base_url}/api"
 
@@ -27,20 +27,21 @@ class CeryxClient(Session):
 
     def _request(self, method, url, payload={}):
         kwargs = {} if method == "get" else {"json": payload}
-        response: Response = self.request(method, url, **kwargs)
+        response: Response = self.session.request(method, url, **kwargs)
         response.raise_for_status()
-        return response.json()
+        return response
 
     def list_routes(self):
-        return self._request("get", f"{self.api_root}/routes/")
+        return self._request("get", f"{self.api_root}/routes/").json()
 
     def get_route(self, host: str):
         route_url = self._get_route_url(host)
-        return self._request("get", route_url)
+        return self._request("get", route_url).json()
 
     def delete_route(self, host: str):
         route_url = self._get_route_url(host)
-        return self._request("delete", route_url)
+        self._request("delete", route_url)
+        return None
 
     def create_route(
         self,
@@ -59,7 +60,8 @@ class CeryxClient(Session):
             certificate_path=None,
             key_path=None,
         )
-        return self._request("post", f"{self.api_root}/routes/", payload)
+        response = self._request("post", f"{self.api_root}/routes/", payload)
+        return response.json()
 
     def update_route(
         self,
@@ -79,4 +81,4 @@ class CeryxClient(Session):
             key_path=None,
         )
         route_url = self._get_route_url(host)
-        return self._request("put", route_url, payload)
+        return self._request("put", route_url, payload).json()
