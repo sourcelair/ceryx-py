@@ -1,0 +1,33 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+
+
+# Sphinx documentation
+docs/_build/
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# Ignore SQLite database
+*.sqlite3
+
+.mypy_cache

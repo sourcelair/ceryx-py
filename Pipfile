@@ -1,0 +1,9 @@
+# Put your Python dependencies in this file
+# More information about Pipfile can be found at https://github.com/pypa/pipfile
+
+[packages]
+requests = "*"
+
+[dev-packages]
+black = "==19.3b0"
+mypy = "*"
